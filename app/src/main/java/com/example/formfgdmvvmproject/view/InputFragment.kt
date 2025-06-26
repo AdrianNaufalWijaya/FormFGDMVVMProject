@@ -12,7 +12,10 @@ import com.example.formfgdmvvmproject.databinding.ActivityMainBinding
 import com.example.formfgdmvvmproject.databinding.FragmentInputBinding
 import com.example.formfgdmvvmproject.viewmodel.AttandanceViewModel
 import com.example.formfgdmvvmproject.model.AttendanceModel
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class InputFragment : Fragment() {
 
     private lateinit var binding: FragmentInputBinding
@@ -53,7 +56,7 @@ class InputFragment : Fragment() {
                     if (binding.chkCrriticalthinking.isChecked) "Critical Thinking" else null,
                     if (binding.chkPrograming.isChecked) "Programing" else null,
                     if (binding.chkDesignthinking.isChecked) "Design Thinking" else null
-                ),
+                ).joinToString (),
                 kategori = binding.spCategory.selectedItem?.toString() ?: "Tidak Diketahui"
 
             )

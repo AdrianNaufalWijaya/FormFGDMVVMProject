@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.dagger.hilt)
+    id("kotlin-kapt")
 }
 
 android {
@@ -41,11 +43,19 @@ android {
 dependencies {
 
     //viewMModel & Livedata
-
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.0")
-
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.livedata)
     implementation("androidx.fragment:fragment-ktx:1.8.7")
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
+
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
+
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

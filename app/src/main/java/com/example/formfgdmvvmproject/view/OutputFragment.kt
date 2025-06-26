@@ -10,8 +10,9 @@ import com.example.formfgdmvvmproject.R
 import com.example.formfgdmvvmproject.databinding.FragmentInputBinding
 import com.example.formfgdmvvmproject.databinding.FragmentOutputBinding
 import com.example.formfgdmvvmproject.viewmodel.AttandanceViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class OutputFragment : Fragment() {
 
     private lateinit var binding: FragmentOutputBinding
@@ -25,13 +26,16 @@ class OutputFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentOutputBinding.inflate(inflater, container, false)
 
-        viewModel.attendanceData.observe(viewLifecycleOwner) {model ->
-            binding.txtNamaResult.text = model.name
-            binding.txtTelefonResult.text = model.phone
-            binding.txtEmailResult.text = model.email
-            binding.txtGenderResult.text = model.gender
-            binding.txtSkillsetResult.text = model.skillset.joinToString(",")
-            binding.txtKategoriResult.text = model.kategori
+        viewModel.attendanceList.observe(viewLifecycleOwner) { list ->
+            binding.txtViewOutput.text = list.joinToString ("\n\n"){
+                "Nama: ${it.name}\n" +
+                        "No HP: ${it.phone}\n"+
+                        "Email: ${it.email}\n" +
+                                "Jenis Kelamin :${it.gender}\n" +
+                                "Skill: ${it.skillset}" +
+                        "Kategori: ${it.kategori}"
+            }
+
         }
 
         return binding.root
